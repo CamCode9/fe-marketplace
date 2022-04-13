@@ -8,30 +8,33 @@ export default function ItemByCat() {
 
   useEffect(() => {
     fetch(`https://jim-cam-marketplace.herokuapp.com/api/items/`)
-    .then(res => res.json())
-    .then(data => setItemCat(data.items));
+      .then((res) => res.json())
+      .then((data) => setItemCat(data.items));
   }, [category_name]);
 
-  console.log(itemCat, 'PRE')
+  const categoryItems = itemCat.filter((item) => {
+    return item.category_name === category_name;
+  });
 
-  const categoryItems = itemCat.filter(item => {
-    if(item.category_name === category_name) {
-      return item;
-    }
-  })
-
-  console.log(categoryItems, 'ITEMS BY CAT')
-  // return (
-  //   <div>
-  //     <h1>Items in {category_name} category:</h1>
-  //     <ul>
-  //       {itemCat.filter((item) => {
-  //         return <li key={item.item_id}>
-
-  //         </li>
-  //       })}
-  //     </ul>
-      
-  //   </div>
-  // )
+  return (
+    <ul>
+      {categoryItems.map((item) => {
+        return (
+          <li key={item.item_id}>
+            <h2> Name: {item.item_name}</h2>
+            <p>Description: {item.description}</p>
+            <img
+              className="ImagePhotos"
+              src={
+                "https://cdn.images.express.co.uk/img/dynamic/20/750x445/1147250.jpg"
+              }
+              alt={` of ${item.item_name}`}
+            />
+            <p>Price: £{item.price}</p>
+            <p> Category: {item.category_name}</p>
+          </li>
+        );
+      })}
+    </ul>
+  );
 }

@@ -12,7 +12,6 @@ const Items = () => {
     <ul>
       {itemsData.map((item) => (
         <li key={item.item_id}>
-          {/* // LINK HERE */}
           <h2> Name: {item.item_name}</h2>
           <p>Description: {item.description}</p>
           <img
@@ -23,7 +22,9 @@ const Items = () => {
             alt={` of ${item.item_name}`}
           />
           <p>Price: £{item.price}</p>
-          <p> Category: {item.category_name}</p>
+          <Link to={`/api/items/${item.category_name}`}>
+            <p> Category: {item.category_name}</p>
+          </Link>
           {/* //Link here */}
         </li>
       ))}

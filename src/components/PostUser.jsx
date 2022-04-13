@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function PostUser() {
   const [user, setUser] = useState({});
-
+  const [submit, setSubmit] = useState(false);
   useEffect(() => {
     fetch(`https://jim-cam-marketplace.herokuapp.com/api/users`, {
       method: "POST",
@@ -10,7 +10,7 @@ export default function PostUser() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: "Test134",
+        username: "Test19",
         avatar_url:
           "https://static.simpsonswiki.com/images/thumb/9/97/Cyrus_Manley.png/200px-Cyrus_Manley.png",
       }),
@@ -20,23 +20,19 @@ export default function PostUser() {
       .catch((error) => {
         console.error("Error", error);
       });
-  }, []);
+  }, [submit]);
 
-  if (user.msg) {
-    return <h1>This user already exists</h1>;
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.body, "e.target");
+    setSubmit(true);
+  };
 
   return (
-    console.log(user.user.username, "this is user"),
-    (
-      <div>
-        <h2>username: {user.user.username}</h2> <p>kudos: {user.user.kudos}</p>
-        <img
-          className="ProfilePicture"
-          src={user.user.avatar_url}
-          alt="Profile "
-        />
-      </div>
-    )
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <label htmlFor="username">username</label>
+      <input type="text" id="username" name="username" />
+      <button>Submit profile</button>
+    </form>
   );
 }

@@ -1,36 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import PostUser from "./PostUser";
 
 const ProfileForm = ({ inputs, setInputs }) => {
   const [showName, setShowName] = useState(false);
+  const [error, setError] = useState(false);
 
   function handlePost(inputs) {
-    {
-      fetch(`https://jim-cam-marketplace.herokuapp.com/api/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: inputs.username,
-          avatar_url: inputs.avatar_url,
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setShowName(true);
+    fetch(`https://jim-cam-marketplace.herokuapp.com/api/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: inputs.username,
+        avatar_url: inputs.avatar_url,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.msg) {
+          setError(true);
+        } else {
           inputs.kudos = res.user.kudos;
-        })
-        .catch((error) => {
-          console.error("Error", error);
-        });
-    }
+          setShowName(true);
+        }
+      });
   }
 
   const handleChange = (event) => {
     const name = event.target.name;
-
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
@@ -63,14 +60,14 @@ const ProfileForm = ({ inputs, setInputs }) => {
             />
           </label>
           <input type="submit"></input>
-          <Link to="/api/users/newprofile" />
+          {error && <h2>Username taken</h2>}
         </form>
       )}
       {showName && (
         <div>
           <h1>{inputs.username}</h1>
-          <img src={inputs.avatar_url} />
-          <p>{inputs.kudos}</p>
+          <h2>{inputs.kudos}</h2>
+          <img alt="Your profile" src={inputs.avatar_url} />
         </div>
       )}
     </div>

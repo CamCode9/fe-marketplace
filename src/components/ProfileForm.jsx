@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PostUser from "./PostUser";
 
 const ProfileForm = ({ inputs, setInputs }) => {
-  console.log(inputs, "this is input");
   function handlePost(inputs) {
     {
       fetch(`https://jim-cam-marketplace.herokuapp.com/api/users`, {
@@ -17,7 +16,9 @@ const ProfileForm = ({ inputs, setInputs }) => {
         }),
       })
         .then((res) => res.json())
-        .then((res) => console.log(res, "res line 20"))
+        .then((res) => {
+          return <h1>{res.user.username}</h1>;
+        })
         .catch((error) => {
           console.error("Error", error);
         });

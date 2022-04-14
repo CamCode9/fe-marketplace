@@ -16,9 +16,7 @@ const Items = () => {
           <p>Description: {item.description}</p>
           <img
             className="ImagePhotos"
-            src={
-              "https://cdn.images.express.co.uk/img/dynamic/20/750x445/1147250.jpg"
-            }
+            src={item.img_url}
             alt={` of ${item.item_name}`}
           />
           <p>Price: £{item.price}</p>

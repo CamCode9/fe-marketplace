@@ -67,7 +67,11 @@ const ProfileForm = ({ inputs, setInputs }) => {
         <div>
           <h1>{inputs.username}</h1>
           <h2>{inputs.kudos}</h2>
-          <img alt="Your profile" src={inputs.avatar_url} />
+          <img
+            className="profileimg"
+            alt="Your profile"
+            src={inputs.avatar_url}
+          />
         </div>
       )}
     </div>

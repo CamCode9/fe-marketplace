@@ -5,7 +5,6 @@ import "./App.css";
 import Items from "./components/AllItems";
 import ItemByCat from "./components/ItemByCat";
 import Nav from "./components/Nav";
-import PostUser from "./components/PostUser";
 import ProfileForm from "./components/ProfileForm";
 
 function App() {
@@ -14,8 +13,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">Test</header>
-      <Nav />
 
+      <Nav />
       <Routes>
         {/* <Route path="/api/users" element={<PostUser />} /> */}
         <Route path="/api/items" element={<Items />} />

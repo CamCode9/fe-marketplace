@@ -22,17 +22,5 @@ export default function PostUser() {
       });
   }, [submit]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.body, "e.target");
-    setSubmit(true);
-  };
-
-  return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="username">username</label>
-      <input type="text" id="username" name="username" />
-      <button>Submit profile</button>
-    </form>
-  );
+  return alert("Posted");
 }
